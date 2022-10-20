@@ -1,3 +1,7 @@
 .item {
     color: maroon;
 }
+
+.item img {
+    border-radius: 50%;
+}
