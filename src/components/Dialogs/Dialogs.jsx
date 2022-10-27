@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 import classes from './Dialogs.module.css'
 
@@ -7,13 +8,13 @@ const Dialogs = (props) => {
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
                 <div className={classes.dialog + ' ' + classes.active}>
-                    Asset
+                    <NavLink to="/messages/1">Asset</NavLink>
                 </div>
                 <div className={classes.dialog}>
-                    Alua
+                    <NavLink to="/messages/2">Alua</NavLink>
                 </div>
                 <div className={classes.dialog}>
-                    Temirlan
+                    <NavLink to="/messages/3">Temirlan</NavLink>
                 </div>
             </div>
             <div className={classes.messages}>
