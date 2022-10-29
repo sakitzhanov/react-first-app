@@ -1,50 +1,22 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import classes from './Dialogs.module.css'
+import DialogItem from './DialogItem/DialogItem'
+import Message from './Message/Message'
 
-const DialogItem = (props) => {
-    return (
-        <div className={classes.dialog + ' ' + classes.active}>
-            <NavLink to={`/messages/${props.id}`}>{props.name}</NavLink>
-        </div>
-    )
-}
+const Dialogs = (props) => {
 
-const Message = (props) => {
-    return (
-        <div className={classes.message}>
-            {props.message}
-        </div>
-    )
-}
+    const dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} profilePicture={d.profilePicture} />);
 
-const Dialogs = () => {
-    
-    const dialogs = [
-        {id: 1, name: 'Asset'},
-        {id: 2, name: 'Alua'},
-        {id: 3, name: 'Temirlan'},
-        {id: 4, name: 'Tair'}
-    ]
-
-    const messages = [
-        {id: 1, message: 'Hi!'},
-        {id: 2, message: 'How r u?'},
-        {id: 3, message: 'Call me back'}
-    ]
-
-    const dialogsElements = dialogs.map(d => <DialogItem name={d.name} id={d.id}  />);
-
-    const messagesElements = messages.map(m => <Message message={m.message} />)
+    const messagesElements = props.state.messages.map(m => <Message message={m.message} isMine={m.isMine} />)
 
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
-                { dialogsElements }
+                {dialogsElements}
             </div>
             <div className={classes.messages}>
-                { messagesElements }
+                {messagesElements}
             </div>
         </div>
     )
