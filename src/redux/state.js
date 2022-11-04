@@ -19,6 +19,7 @@ const state = {
             { id: 4, message: 'Chilling =/', isMine: true },
             { id: 5, message: 'Call me back', isMine: false }
         ],
+        newMessageText: '[]',
         dialogs: [
             { id: 1, name: 'Asset', profilePicture: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png' },
             { id: 2, name: 'Alua', profilePicture: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png' },
@@ -50,6 +51,23 @@ export const addPost = () => {
 
 export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+export const sendMessage = () => {
+    const newMessage = {
+        id: 7,
+        message: state.dialogsPage.newMessageText,
+        isMine: true
+    }
+
+    state.dialogsPage.messages.push(newMessage);
+    state.dialogsPage.newMessageText = '';
+    rerenderEntireTree(state);
+}
+
+export const updateNewMessageText = (newText) => {
+    state.dialogsPage.newMessageText = newText;
     rerenderEntireTree(state);
 }
 

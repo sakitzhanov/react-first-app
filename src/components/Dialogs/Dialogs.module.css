@@ -23,6 +23,10 @@
     border-radius: 50%;
 }
 
+.message, .companionMessage {
+    margin: 10px 0px 10px 0px;
+}
+
 .companionMessage {
     text-align: right;
 }
