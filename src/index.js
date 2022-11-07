@@ -16,8 +16,6 @@ const rerenderEntireTree = (state) => {
         <App
           state={state}
           dispatch={store.dispatch.bind(store)}
-          sendMessage={store.sendMessage.bind(store)}
-          updateNewMessageText={store.updateNewMessageText.bind(store)}
         />
       </BrowserRouter>
     </React.StrictMode>
