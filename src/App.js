@@ -9,6 +9,7 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends'
 import { Route, Routes } from 'react-router-dom';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 function App(props) {
   return (
@@ -20,9 +21,8 @@ function App(props) {
             <Route
               path='/messages/*'
               element={
-                <Dialogs
-                  state={props.state.dialogsPage}
-                  dispatch={props.dispatch}
+                <DialogsContainer
+                  store={props.store}
                 />
               }
             />
@@ -30,8 +30,7 @@ function App(props) {
               path='/profile'
               element={
                 <Profile
-                  profilePage={props.state.profilePage}
-                  dispatch={props.dispatch}
+                  store={props.store}
                 />
               }
             />
