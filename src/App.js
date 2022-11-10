@@ -3,7 +3,6 @@ import React from 'react';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
@@ -15,23 +14,19 @@ function App(props) {
   return (
       <div className='app-wrapper'>
         <Header />
-        <Navbar state={props.state.navbar} />
+        <Navbar />
         <div className='app-wrapper-content'>
           <Routes>
             <Route
               path='/messages/*'
               element={
-                <DialogsContainer
-                  store={props.store}
-                />
+                <DialogsContainer />
               }
             />
             <Route
               path='/profile'
               element={
-                <Profile
-                  store={props.store}
-                />
+                <Profile />
               }
             />
             <Route path='/news' element={<News />}  />
