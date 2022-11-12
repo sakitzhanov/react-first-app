@@ -11,22 +11,8 @@ const initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
-    // if (action.type === ADD_POST) {
-    //     const newPost = {
-    //         id: 5,
-    //         message: state.newPostText,
-    //         likesCount: 0,
-    //         dislikesCount: 0
-    //     };
-    
-    //     state.posts.push(newPost);
-    //     state.newPostText = '';
-    // } else if (action.type === UPDATE_NEW_POST_TEXT) {
-    //     state.newPostText = action.newText;
-    // }
-
     switch(action.type) {
-        case ADD_POST: {
+        case ADD_POST:
             const newPost = {
                 id: 5,
                 message: state.newPostText,
@@ -39,13 +25,11 @@ const profileReducer = (state = initialState, action) => {
                 posts: [...state.posts, newPost],
                 newPostText: ''
             };
-        }
-        case UPDATE_NEW_POST_TEXT: {
+        case UPDATE_NEW_POST_TEXT:
             return {
                 ...state,
                 newPostText: action.newText
             };
-        }
         default:
             return state;
     }
