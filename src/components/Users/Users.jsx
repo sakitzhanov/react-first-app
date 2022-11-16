@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/blank-photo.png';
@@ -29,8 +30,32 @@ const Users = (props) => {
                         </NavLink>
                         <div>
                             {user.followed
-                                ? <button onClick={() => { props.onUnfollow(user.id) }}>Unfollow</button>
-                                : <button onClick={() => { props.onFollow(user.id) }}>Follow</button>
+                                ? <button onClick={() => {
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "00c4cff9-0715-40db-b8f8-55d43746c85c"
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.onUnfollow(user.id);
+                                            }
+                                        })
+                                }}>Unfollow</button>
+                                : <button onClick={() => {
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "00c4cff9-0715-40db-b8f8-55d43746c85c"
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.onFollow(user.id);
+                                            }
+                                        })
+                                }}>Follow</button>
                             }
                         </div>
                     </span>
