@@ -6,7 +6,7 @@ import classes from './Header.module.css';
 const Header = (props) => {
     return (        
         <header className={classes.header}>
-            <img src='https://assets.stickpng.com/images/584290baa6515b1e0ad75ac2.png' width='10%' />
+            <img alt="logo" src='https://assets.stickpng.com/images/584290baa6515b1e0ad75ac2.png' width='10%' />
             <div className={classes.loginBlock}>
                 {props.isAuth
                 ? props.login
