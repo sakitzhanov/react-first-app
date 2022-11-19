@@ -1,6 +1,8 @@
 import React from "react";
 
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { setCurrentPage, toggleFollowingProgress } from "../../redux/users-reducer";
 import { getUsers, follow, unfollow } from "../../redux/users-reducer";
 import Preloader from "../common/Preloader/Preloader";
@@ -72,11 +74,12 @@ const mapStateToProps = (state) => {
 //     }
 // }
 
-
-export default connect(mapStateToProps, {
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers,
-    follow,
-    unfollow
-})(UsersContainer);
+export default compose(
+    connect(mapStateToProps, {
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers,
+        follow,
+        unfollow
+    })
+)(UsersContainer);
