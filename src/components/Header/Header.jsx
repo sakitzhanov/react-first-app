@@ -9,7 +9,7 @@ const Header = (props) => {
             <img alt="logo" src='https://assets.stickpng.com/images/584290baa6515b1e0ad75ac2.png' width='10%' />
             <div className={classes.loginBlock}>
                 {props.isAuth
-                ? props.login
+                ? <div>{props.login} - <button onClick={props.logout}>Logout</button></div>
                 : <NavLink to={'/login'}>Login</NavLink>}                
             </div>
         </header>
