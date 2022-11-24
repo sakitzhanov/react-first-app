@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
+import { Navigate } from "react-router-dom";
+import { compose } from "redux";
 
 import { required } from "../../utils/validators/validators";
 import { Input } from "../common/FormsControls/FormsControls";
 import { login } from "../../redux/auth-reducer";
-import { Navigate } from "react-router-dom";
 import classes from "../common/FormsControls/FormsControls.module.css";
+import withRouter from "../functions/withRouter";
 
 const LoginForm = (props) => {
     return (
@@ -58,4 +60,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {login})(Login);
+export default compose(connect(mapStateToProps, {login}), withRouter)(Login);

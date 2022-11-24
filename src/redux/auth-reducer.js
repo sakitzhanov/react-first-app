@@ -34,7 +34,7 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
 
 export const confirm = () => {
     return (dispatch) => {
-        authApi.confirm()
+        return authApi.confirm()
             .then(data => {
                 if (data.resultCode === 0) {
                     const {id, email, login} = data.data;
