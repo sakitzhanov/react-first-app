@@ -3,7 +3,7 @@ import React from "react";
 import classes from './ProfileInfo.module.css';
 import blankPhoto from "../../../assets/images/blank-photo.png";
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -18,7 +18,7 @@ const ProfileInfo = (props) => {
             <div className={classes.descriptionBlock}>
                 <img alt="profilePhoto" src={props.profile.photos.small === null ? blankPhoto : props.profile.photos.small} className={classes.profilePhoto} />
                 Full name: {props.profile.fullName}
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
             </div>
         </div>
     )
