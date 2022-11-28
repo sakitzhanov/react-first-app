@@ -43,10 +43,12 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = (post) => ({
-    type: ADD_POST,
-    post
-});
+export const addPostActionCreator = (post) => {
+    return {
+        type: ADD_POST,
+        post
+    }
+};
 
 export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE,
