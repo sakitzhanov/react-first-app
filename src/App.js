@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { connect } from "react-redux";
 
 import Navbar from './components/Navbar/Navbar';
@@ -7,13 +7,17 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends'
 import { Route, Routes } from 'react-router-dom';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
+// import DialogsContainer from './components/Dialogs/DialogsContainer';
+// import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
+import { withSuspense } from './hoc/withSuspense';
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 class App extends React.Component {
   componentDidMount() {
@@ -34,12 +38,12 @@ class App extends React.Component {
             <Route
               path='/messages/*'
               element={
-                <DialogsContainer />
+                withSuspense(DialogsContainer)
               }
             />
             <Route path='/profile'>
-              <Route index element={<ProfileContainer />} />
-              <Route path=':userId' element={<ProfileContainer />} />
+              <Route index element={withSuspense(ProfileContainer)} />
+              <Route path=':userId' element={withSuspense(ProfileContainer)} />
             </Route>
             {/* <Route
               path='/profile/:userId'
