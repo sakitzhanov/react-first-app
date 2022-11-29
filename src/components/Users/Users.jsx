@@ -3,52 +3,24 @@ import React from "react";
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/blank-photo.png';
 import { NavLink } from "react-router-dom";
+import Paginator from "../common/Paginator/Paginator";
+import User from "./User";
 
-const Users = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
+const Users = ({ currentPage, totalUsersCount, pageSize, onSetCurrentPage, ...props }) => {
     return (
         <div>
-            <div>
-                {pages.map(val => (
-                    <span key={val} onClick={() => { props.onSetCurrentPage(val) }} className={props.currentPage === val ? classes.selectedPage : undefined}>&nbsp;{val}</span>
-                ))}
-            </div>
+            <Paginator currentPage={currentPage} totalUsersCount={totalUsersCount} pageSize={pageSize} onSetCurrentPage={onSetCurrentPage} />
             {
-                props.users.map(user => <div key={user.id}>
-                    <span>
-                        <NavLink to={'/profile/' + user.id}>
-                            <div>
-                                <img alt="userPhoto" src={user.photos.small === null ? userPhoto : user.photos.small} className={classes.userPhoto} />
-                            </div>
-                        </NavLink>
-                        <div>
-                            {user.followed
-                                ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                                    props.unfollow(user.id);
-                                }}>Unfollow</button>
-                                : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                                    props.follow(user.id);
-                                }}>Follow</button>
-                            }
-                        </div>
-                    </span>
-                    <span>
-                        <span>
-                            <div>{user.name}</div>
-                            <div>{user.status}</div>
-                        </span>
-                        <span>
-                            <div>{"user.location.city"}</div>
-                            <div>{"user.location.country"}</div>
-                        </span>
-                    </span>
-                </div>)
+                props.users.map(user => <User
+                    id={user.id}
+                    followed={user.followed}
+                    photos={user.photos}
+                    name={user.name}
+                    status={user.status}
+                    followingInProgress={props.followingInProgress}
+                    follow={props.follow}
+                    unfollow={props.unfollow}
+                />)
             }
         </div>
     )

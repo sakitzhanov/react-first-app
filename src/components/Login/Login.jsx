@@ -10,9 +10,9 @@ import { login } from "../../redux/auth-reducer";
 import classes from "../common/FormsControls/FormsControls.module.css";
 import withRouter from "../functions/withRouter";
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error }) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field placeholder={"Email"} name={"email"} component={Input} validate={[required]} />
             </div>
@@ -22,9 +22,9 @@ const LoginForm = (props) => {
             <div>
                 <Field component={Input} name={"rememberMe"} type="checkbox" />Remember me
             </div>
-            {props.error &&
+            {error &&
             <div className={classes.formSummaryError}>
-                {props.error}
+                {error}
             </div>}
             <div>
                 <button>Login</button>
