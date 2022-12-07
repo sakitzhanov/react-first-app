@@ -21,8 +21,10 @@ const ProfileInfo = (props) => {
     }
 
     const onSubmit = (formData) => {
-        props.saveProfile(formData);
-        setEditMode(false);
+        props.saveProfile(formData)
+            .then(() => {
+                setEditMode(false);
+            });
     }
 
     return (        
@@ -35,7 +37,7 @@ const ProfileInfo = (props) => {
                 {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected} />}
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
                 {editMode
-                    ? <ProfileDataForm initialValues={props.profile} onSubmit={onSubmit} />
+                    ? <ProfileDataForm profile={props.profile} initialValues={props.profile} onSubmit={onSubmit} />
                     : <ProfileData profile={props.profile} isOwner={props.isOwner} activateEditMode={() => setEditMode(true)} />}
             </div>
         </div>
@@ -70,7 +72,7 @@ const ProfileData = (props) => {
 const Contact = ({ contactTitle, contactValue }) => {
     return (
         <div style={{padding: '0px 0px 0px 50px'}}>
-            {contactTitle}: {contactValue}
+            {contactTitle}: <a href={contactValue}>{contactValue}</a>
         </div>
     )
 }
