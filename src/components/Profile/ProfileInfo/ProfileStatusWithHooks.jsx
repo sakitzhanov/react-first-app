@@ -32,7 +32,7 @@ const ProfileStatus = (props) => {
                 </div>
                 :
                 <div>
-                    <span onDoubleClick={() => setEditMode(true)}>{status}</span>
+                    <b>Status: </b><span onDoubleClick={() => setEditMode(true)}>{status}</span>
                 </div>
             }
         </div>

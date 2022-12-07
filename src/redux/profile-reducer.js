@@ -4,6 +4,7 @@ const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
+const SAVE_PROFILE_SUCCESS = 'SAVE_PROFILE_SUCCESS';
 
 const initialState = {
     posts: [
@@ -71,6 +72,11 @@ export const savePhotoSuccess = (photos) => ({
     photos
 });
 
+export const saveProfileSuccess = (profileData) => ({
+    type: SAVE_PROFILE_SUCCESS,
+    profileData
+});
+
 export const getProfile = (userId) => {
     return (dispatch) => {
         profileApi.getProfile(userId)
@@ -105,7 +111,19 @@ export const savePhoto = (file) => {
         profileApi.savePhoto(file)
             .then(data => {
                 if (data.resultCode === 0) {
-                    dispatch(savePhotoSuccess(data.photos));
+                    dispatch(savePhotoSuccess(data.data.photos));
+                };
+            })
+    }
+}
+
+export const saveProfile = (profileData) => {
+    return (dispatch, getState) => {
+        const userId = getState().auth.userId;
+        profileApi.saveProfile(profileData)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(getProfile(userId));
                 };
             })
     }

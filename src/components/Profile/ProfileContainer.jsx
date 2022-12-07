@@ -5,7 +5,7 @@ import classes from './Profile.module.css';
 
 import Profile from './Profile';
 import { connect } from "react-redux";
-import { getProfile, getStatus, updateStatus, savePhoto } from "../../redux/profile-reducer";
+import { getProfile, getStatus, updateStatus, savePhoto, saveProfile } from "../../redux/profile-reducer";
 import withRouter from "../functions/withRouter";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default compose(
-    connect(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto}),
+    connect(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     withRouter
     // withAuthRedirect
 )(ProfileContainer);
